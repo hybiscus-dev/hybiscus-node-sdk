@@ -1,0 +1,64 @@
+name: Release package to NPM
+permissions:
+    contents: write
+    id-token: write
+    packages: write
+on: 
+    workflow_dispatch:
+        inputs:
+            pre_release:
+                description: 'Pre-release version'
+                required: false
+                type: boolean
+                default: false
+jobs:
+    release:
+        if: github.ref == 'refs/heads/dev'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "22"
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Install pnpm
+              run: npm install -g pnpm@latest
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - name: Build
+              run: pnpm run build --if-present
+            - name: Linting
+              run: pnpm run lint:check
+            - name: Tests
+              run: pnpm test
+            - name: Setup Git identity
+              run: |
+                git config --global user.name "Hybiscus"
+                git config --global user.email "support@hybiscus.dev"
+            - name: Bump version
+              run: pnpm run release
+              if: ${{ github.event.inputs.pre_release == 'false' }}
+            - name: Bump pre-release version
+              run: pnpm run release --prerelease beta
+              if: ${{ github.event.inputs.pre_release == 'true' }}
+            - name: Publish
+              run: npm publish --provenance --access public
+              if: ${{ github.event.inputs.pre_release == 'false' }}
+              env:
+                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: Publish pre-release
+              run: npm publish --provenance --access public --tag next
+              if: ${{ github.event.inputs.pre_release == 'true' }}
+              env:
+                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: Merge source branch into main
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                git push origin dev --tags
+                git fetch origin
+                git checkout main
+                git merge dev
+                git push origin main

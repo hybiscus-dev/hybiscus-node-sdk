@@ -1,0 +1,23 @@
+{
+    "recurseDepth": 10,
+    "source": {
+        "include": [
+            "lib/esm/Client.js",
+            "lib/esm/Report.js",
+            "lib/esm/HttpTransport.js",
+            "lib/esm/components/core/index.js",
+            "lib/esm/components/premium/index.js"
+        ],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "sourceType": "module",
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc", "closure"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}
