@@ -33,9 +33,8 @@
 ### ⚠️ Breaking changes from `@hybiscus/web-api`
 - `reportSchema` option from `Client.HybiscusClient.buildReport` and `Client.HybiscusClient.previewReport` changed to `reportJSON`, in alignment with terminology update on API docs
 - `Client.HybiscusClient.buildReport` / `Client.HybiscusClient.previewReport` throw an error if there is an error received from the API, instead of resolving with the error in the attribute `errorMessage`
-- The return from `Client.HybiscusClient.buildReport` / `Client.HybiscusClient.previewReport` no longer contains the attribute `errorMessage`. Instead, the error thrown is typed with the interface `Report.IHybiscusClientError`
-- Minimum version of NodeJS v20.X required
-- 
+- The return from `Client.HybiscusClient.buildReport` / `Client.HybiscusClient.previewReport` no longer contains the attribute `errorMessage`. Instead, the error thrown is typed with the interface `utils.api.HybiscusAPIError`
+- Minimum version of NodeJS `v20.X` required
 </details>
 
 
