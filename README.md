@@ -82,19 +82,19 @@ const section = new Section({ section_title: "title" }).addComponents([
     ]),
 ]);
 
-const report = new Report(
-    {
-        report_title: "Report title",
-        report_byline: "The byline",
-    },
-    {
-        color_theme: "forest",
-    },
-);
+const options = {
+   report_title: "Report title",
+   report_byline: "The byline"
+};
+const config = {
+   color_theme: "forest"
+}
+
+const report = new Report(options, config);
 report.addComponent(section);
 ```
 
-2. Initialise an instance of `HybiscusClient`, and call the `buildReport` method.
+1. Initialise an instance of `HybiscusClient`, and call the `buildReport` method.
 
 ```typescript
 const client = new HybiscusClient({
@@ -158,6 +158,48 @@ const section = new Section({ section_title: "title" })
 ```
 
 This forms part of the declarative API, which lets you define the report contents without worrying about layout and design, and focusing on content.
+
+### Cover page
+To add a cover page to your report, call the `Report.addCoverPage` method as follows. This method accepts an object with the same options for the cover page as defined in the [API docs](https://hybiscus.dev/docs/reports/cover-page).
+
+```typescript
+import { HybiscusClient, Report, Components } from "@hybiscus/api";
+const { Core } = Components;
+const { Section, Table, Row } = Core;
+
+const options = {
+   report_title: "Report title",
+   report_byline: "The byline"
+};
+const config = {
+    enable_multi_page: true
+}
+const report = new Report(options, config);
+report.addCoverPage({
+    bg_color: "accent"
+});
+```
+
+To add a component to the cover page, call the `report.addCoverPageComponent` method with an instance of a component. As per the [API docs](https://hybiscus.dev/docs/reports/cover-page), only the [Row](https://hybiscus.dev/docs/components/row), [Image](https://hybiscus.dev/docs/components/image), [Text](https://hybiscus.dev/docs/components/text) and [VerticalSpacer](https://hybiscus.dev/docs/components/vertical-spacer) components are supported in the cover page.
+
+```typescript
+import { Components } from "@hybiscus/api";
+const { Core } = Components;
+const { Text } = Core;
+
+...
+
+report.addCoverPageComponent(
+   new Text({
+      text: "# Cover page title",
+      color: "headline",
+      size: "xl",
+      markdown_format: true,
+      bg_color: "background-default",
+      inner_padding: 12,
+   }),
+);
+```
 
 ### Client
 
