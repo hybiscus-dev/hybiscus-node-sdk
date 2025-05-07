@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.0.0-beta.2](https://github.com/hybiscus-dev/hybiscus-node-sdk/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2025-05-07)
+
+
+### Features
+
+* update README ([86a54e3](https://github.com/hybiscus-dev/hybiscus-node-sdk/commit/86a54e3b07ad972327afeba39e93bd44546fb315))
+
 ## 1.0.0-beta.1 (2025-05-05)
 
 
