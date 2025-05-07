@@ -56,7 +56,7 @@ $   npm install @hybiscus/api
 
 This library provides a declarative API for building up the report and the components inside it. Below is a simple example to get you started:
 
-> **Note**
+> [!NOTE]
 > To use the Hybiscus API, you will require an API key which you can get by signing up at [https://hybiscus.dev/signup](https://hybiscus.dev/signup) for a **Free trial**. For more details of the plans on offer, see [here](https://hybiscus.dev/plans). This library can also be used with the Managed Cloud deployment of the API in your own private cloud, available to Enterprise plan subscribers.
 
 ### Quick start
