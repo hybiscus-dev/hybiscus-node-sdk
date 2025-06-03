@@ -1,6 +1,6 @@
 {
     "name": "@hybiscus/api",
-    "version": "1.0.0-beta.2",
+    "version": "1.0.0",
     "description": "Official JavaScript / TypeScript library to interact with Hybiscus REST API for PDF generation",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
